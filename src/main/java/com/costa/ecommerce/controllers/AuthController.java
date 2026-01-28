@@ -14,10 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDateTime;
 import java.util.Optional;
 
-import static com.costa.ecommerce.domain.users.UsersRole.USER;
+import static com.costa.ecommerce.domain.users.UsersRole.ADMIN;
 
 @RestController
 @RequestMapping("/auth")
@@ -46,7 +45,7 @@ public class AuthController {
             newUser.setPassword(passwordEncoder.encode(body.password()));
             newUser.setName(body.name());
             newUser.setEmail(body.email());
-            newUser.setRole(USER);
+            newUser.setRole(ADMIN);
             this.usersRepository.save(newUser);
 
             String token = tokenService.generateToken(newUser);
